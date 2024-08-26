@@ -3,9 +3,11 @@ kind: ConfigMap
 metadata:
   name: dvwa-config
 data:
+  PHP_VERSION: "8.1"
+  LISTEN_PORT: "8000"
   RECAPTCHA_PRIV_KEY: ""
   RECAPTCHA_PUB_KEY: ""
-  SECURITY_LEVEL: "low"
+  SECURITY_LEVEL: "medium"
   PHPIDS_ENABLED: "0"
-  PHPIDS_VERBOSE: "1"
-  PHP_DISPLAY_ERRORS: "1"
+  PHPIDS_VERBOSE: "0"
+  PHP_DISPLAY_ERRORS: "0"
