@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Kubernetes manifests (if you don't want to track them)
+# If you do want to track them, remove these lines
+*.yaml
+*.yml
+
+# Temporary files
+*.tmp
+*.swp
+
+# Build artifacts
+build/
+dist/
+out/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Docker files
+docker-compose.override.yml
+Dockerfile.*
+
+# Minikube
+minikube/
+
+# Other files you may want to ignore
+*.bak
+*.orig
+*.diff
+*.patch
+
+# Ignore files and directories related to sensitive data
+config/
+secrets/
