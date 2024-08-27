@@ -1,50 +1,43 @@
-# Kubernetes-DVWA-Setup
-Overview
-This repository provides instructions to deploy the Damn Vulnerable Web Application (DVWA) on a local Kubernetes cluster using Minikube. DVWA is an intentionally vulnerable web application used for testing web application security.
+# Kubernetes DVWA Demo
 
-Prerequisites
-Minikube - A local Kubernetes cluster.
-kubectl - The Kubernetes command-line tool.
-Git - To clone the repository.
-Setup
-1. Install Minikube and kubectl
-Follow the installation steps for Minikube and kubectl:
+This repository provides a setup for deploying a local Kubernetes cluster with DVWA (Damn Vulnerable Web Application) using Minikube. It also includes instructions for demonstrating common web vulnerabilities.
 
-For macOS:
+## Table of Contents
 
-bash
-Copy code
-# Download and install Minikube
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
-sudo install minikube-darwin-amd64 /usr/local/bin/minikube
+1. [Setup Instructions](#setup-instructions)
+    - [Install Minikube](#install-minikube)
+    - [Start Minikube](#start-minikube)
+    - [Install kubectl](#install-kubectl)
+2. [Deploy DVWA](#deploy-dvwa)
+    - [Create Deployment and Service Files](#create-deployment-and-service-files)
+    - [Deploy DVWA](#deploy-dvwa)
+    - [Access DVWA](#access-dvwa)
+3. [Demonstrate Attack Vectors](#demonstrate-attack-vectors)
+    - [SQL Injection](#sql-injection)
+    - [Cross-Site Scripting (XSS)](#cross-site-scripting-xss)
+    - [Command Injection](#command-injection)
+4. [Cleanup](#cleanup)
 
-# Download and install kubectl
-curl -LO "https://dl.k8s.io/release/v1.27.1/bin/darwin/amd64/kubectl"
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-For other OS: Follow the Minikube installation guide and the kubectl installation guide.
+## Setup Instructions
 
-2. Start Minikube
-Start the Minikube cluster:
+### Install Minikube
 
-bash
-Copy code
-minikube start
-Deploy DVWA
-1. Clone the Repository
-Clone the repository containing DVWA:
+To install Minikube, run the following script:
 
-bash
-Copy code
-git clone https://github.com/digininja/DVWA.git
-cd DVWA
-2. Create Kubernetes Manifests
-Create Kubernetes deployment and service manifests for DVWA.
+bash setup-scripts/install-minikube.sh
 
-dvwa-deployment.yaml
+Start Minikube-Start Minikube to create a local Kubernetes cluster: 
+bash setup-scripts/start-minikube.sh
 
-yaml
-Copy code
+Install kubectl-To install kubectl, run the following script:
+bash setup-scripts/install-kubectl.sh
+
+Verify the installation with:
+kubectl version --client
+
+### Deploy DVWA
+Create Deployment and Service Files
+Create a file named dvwa-deployment.yaml with the following content:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,76 +57,43 @@ spec:
         image: vulnerables/web-dvwa
         ports:
         - containerPort: 80
-dvwa-service.yaml
 
-yaml
-Copy code
-apiVersion: v1
-kind: Service
-metadata:
-  name: dvwa
-spec:
-  type: NodePort
-  selector:
-    app: dvwa
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 30001
-3. Apply the Manifests
-Deploy DVWA to your Minikube cluster:
-
-bash
-Copy code
+Deploy DVWA
+Apply the deployment with:
 kubectl apply -f dvwa-deployment.yaml
-kubectl apply -f dvwa-service.yaml
-4. Verify the Deployment
-Check the status of the pods and services:
 
-bash
-Copy code
-kubectl get pods
-kubectl get services
-5. Access DVWA
-To access the DVWA application, open the following URL in your browser:
+Access DVWA
+To access DVWA, use the Minikube service command:
+minikube service dvwa-service
+This will open a browser window with the DVWA login page.
 
-plaintext
-Copy code
-http://localhost:30001
-Demonstrate Attack Surfaces
-DVWA showcases several vulnerabilities. Use the following URLs to demonstrate each vulnerability:
+### Demonstrate Attack Vectors
+SQL Injection
+Attack Vector: SQL Injection
 
-SQL Injection:
+Steps:
+Open the DVWA login page in your browser (provided by Minikube service command).
+In the login form, enter the following payload in the username field: ' OR 1=1 --.
+Leave the password field empty.
+Click "Login."
+Observation: The payload bypasses authentication, indicating an SQL Injection vulnerability.
 
-Navigate to: http://localhost:30001/dvwa/vulnerabilities/sqli/
+Cross-Site Scripting (XSS)
+Attack Vector: Cross-Site Scripting (XSS)
 
-Example Input: 1' OR '1'='1
+Steps:
+Navigate to the “XSS (Stored)” section in DVWA.
+In the message field, enter the following payload: <script>alert('XSS')</script>.
+Submit the form.
+Observation: An alert box pops up when the page is loaded, indicating an XSS vulnerability.
 
-Cross-Site Scripting (XSS):
+Command Injection
+Attack Vector: Command Injection
 
-Navigate to: http://localhost:30001/dvwa/vulnerabilities/xss_d/
-
-Example Input: <script>alert('XSS')</script>
-
-Command Injection:
-
-Navigate to: http://localhost:30001/dvwa/vulnerabilities/exec/
-
-Example Input: ; ls -la
-
-Cleanup
-To delete the DVWA deployment and service:
-
-bash
-Copy code
-kubectl delete -f dvwa-service.yaml
-kubectl delete -f dvwa-deployment.yaml
-To stop Minikube:
-
-bash
-Copy code
-minikube stop
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+Steps:
+Navigate to the “Command Injection” section in DVWA.
+In the input field, enter the following payload: ; ls -la.
+Submit the form.
+Observation: The directory listing of the server is displayed, indicating a command injection vulnerability.
+        
 
