@@ -1,4 +1,4 @@
-# Kubernetes DVWA Setup
+# DVWA-K8s cluster 
 
 This repository provides a setup for deploying a local Kubernetes cluster with DVWA (Damn Vulnerable Web Application) using Minikube. It also includes instructions for demonstrating common web vulnerabilities.
 
