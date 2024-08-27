@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dvwa
+  name: dvwa - service
 spec:
   type: NodePort
   selector:
@@ -10,4 +10,5 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
-    nodePort: 30001
+    type: LoadBalancer
+    (base) [200t@GUI ~]#
