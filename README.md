@@ -8,7 +8,8 @@ This repository provides a setup for deploying a local Kubernetes cluster with D
     - [Install Minikube](#install-minikube)
     - [Start Minikube](#start-minikube)
     - [Install kubectl](#install-kubectl)
-  ![Uploading Screenshot (121).png…]()
+  
+![Screenshot (121)](https://github.com/user-attachments/assets/9cbd2957-69ce-4894-8c80-e927f687ca91)
 
       
 2. [Deploy DVWA](#deploy-dvwa)
@@ -37,6 +38,8 @@ bash setup-scripts/install-kubectl.sh
 
 Verify the installation with:
 kubectl version --client
+
+![Screenshot (122)](https://github.com/user-attachments/assets/f2ff50ab-727f-43d8-a004-260bdd3c8ea8)
 
 ### Deploy DVWA
 Create Deployment and Service Files
@@ -70,6 +73,11 @@ To access DVWA, use the Minikube service command:
 minikube service dvwa-service
 This will open a browser window with the DVWA login page.
 
+
+![Screenshot (123)](https://github.com/user-attachments/assets/7d2e7e80-9ec0-4b1f-afb6-e9d8007b9814)
+
+
+
 ### Demonstrate Attack Vectors
 SQL Injection
 Attack Vector: SQL Injection
@@ -81,12 +89,18 @@ Leave the password field empty.
 Click "Login."
 Observation: The payload bypasses authentication, indicating an SQL Injection vulnerability.
 
+![Screenshot (125)](https://github.com/user-attachments/assets/c45e8ef8-9bab-4c76-bda0-ef41b09065e9)
+
+
 Cross-Site Scripting (XSS)
 Attack Vector: Cross-Site Scripting (XSS)
 
 Steps:
 Navigate to the “XSS (Stored)” section in DVWA.
 In the message field, enter the following payload: <script>alert('XSS')</script>.
+
+![Screenshot (125)](https://github.com/user-attachments/assets/1719972b-4c8f-4e6a-aa6e-e9f7a0a47bbf)
+
 Submit the form.
 Observation: An alert box pops up when the page is loaded, indicating an XSS vulnerability.
 
@@ -96,6 +110,9 @@ Attack Vector: Command Injection
 Steps:
 Navigate to the “Command Injection” section in DVWA.
 In the input field, enter the following payload: ; ls -la.
+
+![Screenshot (125)](https://github.com/user-attachments/assets/ae795f21-0119-486d-ad18-6a2970167367)
+
 Submit the form.
 Observation: The directory listing of the server is displayed, indicating a command injection vulnerability.
 
