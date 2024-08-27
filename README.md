@@ -97,6 +97,9 @@ Submit the form.
 Observation: The directory listing of the server is displayed, indicating a command injection vulnerability.
 
 
+
+### 📄 License
+
 ### MIT License
 
 Copyright (c) 2024 [Kubernetes DVWA Setup]
