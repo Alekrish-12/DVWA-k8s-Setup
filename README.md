@@ -99,7 +99,8 @@ Steps:
 Navigate to the “XSS (Stored)” section in DVWA.
 In the message field, enter the following payload: <script>alert('XSS')</script>.
 
-![Screenshot (125)](https://github.com/user-attachments/assets/1719972b-4c8f-4e6a-aa6e-e9f7a0a47bbf)
+![Screenshot (129)](https://github.com/user-attachments/assets/5451766e-3cc1-4f71-85c6-d28a1b35eb54)
+
 
 Submit the form.
 Observation: An alert box pops up when the page is loaded, indicating an XSS vulnerability.
@@ -111,7 +112,8 @@ Steps:
 Navigate to the “Command Injection” section in DVWA.
 In the input field, enter the following payload: ; ls -la.
 
-![Screenshot (125)](https://github.com/user-attachments/assets/ae795f21-0119-486d-ad18-6a2970167367)
+![Screenshot (128)](https://github.com/user-attachments/assets/16516cf3-a4a8-4865-a6eb-3a94c6e521e9)
+
 
 Submit the form.
 Observation: The directory listing of the server is displayed, indicating a command injection vulnerability.
