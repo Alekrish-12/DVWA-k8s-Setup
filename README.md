@@ -8,6 +8,9 @@ This repository provides a setup for deploying a local Kubernetes cluster with D
     - [Install Minikube](#install-minikube)
     - [Start Minikube](#start-minikube)
     - [Install kubectl](#install-kubectl)
+  ![Uploading Screenshot (121).png…]()
+
+      
 2. [Deploy DVWA](#deploy-dvwa)
     - [Create Deployment and Service Files](#create-deployment-and-service-files)
     - [Deploy DVWA](#deploy-dvwa)
