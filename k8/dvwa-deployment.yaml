@@ -15,14 +15,6 @@ spec:
       containers:
       - name: dvwa
         image: vulnerables/web-dvwa
-        env:
-        - name: MYSQL_HOST
-          value: mysql
-        - name: MYSQL_USER
-          value: dvwauser
-        - name: MYSQL_PASSWORD
-          value: dvwapassword
-        - name: MYSQL_DATABASE
-          value: dvwa
+        
         ports:
         - containerPort: 80
